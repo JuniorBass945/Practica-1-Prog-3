@@ -1,9 +1,10 @@
-    .Cuerpo {
-        display: block;
-        text-align: center;
-        margin-block-end: 50%;
-        margin-left: 10%;
-        margin-right: 10%;
+    * {
+        margin: 0;
+        padding: 0%;
+    }
+    
+    .container {
+        width: 100%;
     }
     
     table {
@@ -12,9 +13,5 @@
     
     h1 {
         padding-top: 3%;
-    }
-    
-    .add {
-        float: right;
-        inline-size: auto;
+        text-align: center;
     }
