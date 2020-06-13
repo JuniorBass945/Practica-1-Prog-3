@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -11,6 +12,9 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { EmpleosComponent } from './empleos/empleos.component';
 import { CreateOrUpdateEmpresaComponent } from './create-or-update-empresa/create-or-update-empresa.component';
+import { EmpleosService } from './empleos/empleos.service';
+
+
 
 @NgModule({
   declarations: [
@@ -32,9 +36,10 @@ import { CreateOrUpdateEmpresaComponent } from './create-or-update-empresa/creat
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'empleos', component: EmpleosComponent },
       { path: 'empleos/add', component: CreateOrUpdateEmpresaComponent },
-    ])
+    ]),
+    NgxDatatableModule
   ],
-  providers: [],
+  providers: [EmpleosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,15 +8,15 @@
   <div class="container" style="width: 100%;">
 
     <section class="sub-header">
-      <form class="form-inline" method="POST" name="Search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-inline" method="POST" name="Search" (submit)="jobsSearcher()">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="valorBusc" name="buscado">
         <button class="btn btn-success" type="submit">Search</button>
       </form>
 
       <div class="Add">
 
         <div class="nav justify-content-end">
-          <a class="btn btn-primary" href="empleos/add" role="button"><i class="fas fa-plus-circle"> <b>Agregar un empleos</b></i> </a>
+          <a class="btn btn-primary" href="empleos/add" role="button"><i class="fas fa-plus-circle"> <b>Agregar empleo</b></i> </a>
         </div>
 
       </div>
@@ -28,37 +28,39 @@
 
 
     <!--- Tabla de Registro-->
+    <div class="mb-5" *ngFor="let categoria of searchResult">
+      <div *ngIf="categoria.jobPosting.length > 0">
+        
+        <a href="#"><strong>{{categoria.categoryName | uppercase }}</strong> {{categoria.jobPosting.length}} resultados<span></span> <span class="float-right">Mas..</span></a>
+        <!--<div>
+    <ngx-datatable
+                   [rows]="categoria.jobPosting"
+                   [columns]="columns"
+                   [columnMode]="ColumnMode.force"
+                   [rowClass]="getRowClass"
+                   [sorts]="[{ prop: 'jobPostingId', dir: 'desc' }]"
+                   > </ngx-datatable>
+  </div>-->
 
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Location</th>
-          <th scope="col">Position</th>
-          <th scope="col">Company</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-          <td>Ejemplo de muestra</td>
-        </tr>
-      </tbody>
-    </table>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Location</th>
+              <th scope="col">Position</th>
+              <th scope="col">Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let empleo of reverseJobs(categoria.jobPosting).slice(0, 10)">
+              <td>{{empleo.location}}</td>
+              <td>{{empleo.position}}</td>
+              <td>{{empleo.company}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
  
 

@@ -27,6 +27,13 @@ namespace Boem.Controllers
             return _context.Category;
         }
 
+        // GET: api/Categories/GetJobsByCategory
+        [HttpGet("GetJobsByCategory")]
+        public IEnumerable<Category> GetJobsByCategory()
+        {
+            return _context.Category.Include(x => x.JobPosting);
+        }
+
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory([FromRoute] int id)

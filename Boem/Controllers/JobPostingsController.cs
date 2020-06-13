@@ -24,7 +24,7 @@ namespace Boem.Controllers
         [HttpGet]
         public IEnumerable<JobPosting> GetJobPosting()
         {
-            return _context.JobPosting;
+            return _context.JobPosting.OrderBy(x => x.CategoryId);
         }
 
         // GET: api/JobPostings/5
