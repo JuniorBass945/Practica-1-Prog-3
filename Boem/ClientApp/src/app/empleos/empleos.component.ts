@@ -36,17 +36,21 @@ export class EmpleosComponent implements OnInit {
 
   reverseJobs(jobs: IEmpleos[]) {
 
-    return jobs.reverse();
+    return jobs.sort(function (a, b) {
+      if (a.jobPostingId < b.jobPostingId) {
+        return 1;
+      }
+      if (a.jobPostingId > b.jobPostingId) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+
 
   }
 
   jobsSearcher() {
-
-    //let resul = this.empleosPorCategoria.map(x => x.jobPosting.filter(empleo =>
-    //  empleo.location.toLowerCase().indexOf(this.valorBusc.toLowerCase()) > -1 ||
-    //  empleo.position.toLowerCase().indexOf(this.valorBusc.toLowerCase()) > -1 ||
-    //  empleo.company.toLowerCase().indexOf(this.valorBusc.toLowerCase()) > -1 ||
-    //  x.categoryName.toLowerCase().indexOf(this.valorBusc.toLowerCase()) > -1));
 
     this.valorBusc = (this.valorBusc) ? this.valorBusc : " ";
 
@@ -64,7 +68,10 @@ export class EmpleosComponent implements OnInit {
 
     });
 
+
     this.searchResult = resul;
+
+    
    
   }
 

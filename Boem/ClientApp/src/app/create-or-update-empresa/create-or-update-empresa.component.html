@@ -1,73 +1,114 @@
 <header class="text-center">
-  <h1>Agregue un empleo al sitio</h1>
+  <h1 *ngIf="edicion; else editBlock">Editar empleo</h1>
+  <ng-template #editBlock><h1>Registrar empleo</h1></ng-template>
 </header>
 
-<hr>
 
-
-  <div class="card text-center">
-    <div class="card-header">
-      <ul class="nav nav-pills card-header-pills">
-        <li class="nav-item">
-          <a class="nav-link active" href="/empleos"><i class="fas fa-arrow-circle-left" style="font-size: large"> Atras</i></a>
-        </li>
-      </ul>
-    </div>
-    <div class="card-body">
-      <h4 class="card-title">Haga su oferta ahora</h4>
-
-      <div class="Formulario">
-        <div class="Card">
-          <form action="" method="post">
-
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <label for="validationDefault01">Nombre de la empresa</label>
-                <input type="text" class="form-control" id="validationDefault01" name="Empresa" placeholder="Nombre de la empresa" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="validationDefault02">Nombre del puesto</label>
-                <input type="text" class="form-control" id="validationDefault02" name="Puesto" placeholder="Nombre del empleo ofertado" required>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <label for="validationDefault03">Ciudad</label>
-                <input type="text" class="form-control" id="validationDefault03" name="Ciudad" placeholder="Ubicacion de la empresa" required>
-              </div>
-              <div class="col-md-6 mb-6">
-                <label for="validationDefault04">Categoria</label>
-                <select class="form-control" id="validationDefault04" name="Categoria" required>
-
-                  <option selected disabled value="Elija una Categoria de empleo">Elija una Categoria de empleo</option>
-                  <option>Categoria 2</option>
-                  <option>Categoria 3</option>
-                  <option>Categoria 4</option>
-                  <option>Categoria 1</option>
-
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Description del puesto</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" cols="150" name="Description" required></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input class="" type="checkbox" value="" id="invalidCheck2" name="invalidCheck2" required>
-                <label class="form-check-label" for="invalidCheck2"> Acepto los terminos y condiciones</label>
-              </div>
-            </div>
-            <button class="btn btn-primary" type="submit">Agregar</button>
-
-
-          </form>
-
-        </div>
-      </div>
-
-
-
-    </div>
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="/empleos"><i class="fas fa-arrow-circle-left" style="font-size: large"> Atras</i></a>
+      </li>
+    </ul>
   </div>
+  <div class="card-body">
+    <div class="Formulario">
+      <span class="help-block f-left"> Campos con asterisco(*) son requeridos</span>
+      <div class="Card">
+        <form (ngSubmit)="save()" [formGroup]="formGroup" novalidate>
+          <div class="form-row mb-3">
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('categoryId').touched || formGroup.get('categoryId').dirty) && !formGroup.get('categoryId').valid}">
+              <label for="categoria">Categoria *</label>
+              <ngx-select-dropdown name="categoria"
+                                   (change)="selectionChanged($event)"
+                                   formControlName="category"
+                                   [config]="config"
+                                   [options]="categories"
+                                   required>
+              </ngx-select-dropdown>
+
+            </div>
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('jobType').touched || formGroup.get('jobType').dirty) && !formGroup.get('jobType').valid}">
+              <label for="tipo">Tipo *</label>
+              <select class="form-control"
+                      id="tipo"
+                      name="tipo"
+                      formControlName="jobType"
+                      required>
+                <option value="0">Seleccionar tipo de empleo</option>
+                <option *ngFor="let type of JobTypes" value={{type.id}}>{{type.name}}</option>
+
+              </select>
+            </div>
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('company').touched || formGroup.get('company').dirty) && !formGroup.get('company').valid}">
+
+              <label for="Compañia">Compañia *</label>
+              <input type="text" class="form-control" id="compañia" name="compañia" placeholder="Nombre de compañia" formControlName="company" required>
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-md-4">
+              <label>Logo</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" formControlName="logo" (change)="handleFileInput($event.target.files)">
+                <label class="custom-file-label" for="inputGroupFile04">Elegir archivo</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="url">URL</label>
+              <input type="text" class="form-control" id="url" name="url" placeholder="URL" formControlName="url">
+            </div>
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('position').touched || formGroup.get('position').dirty) && !formGroup.get('position').valid}">
+
+              <label for="Posicion">Posicion *</label>
+              <input type="text" class="form-control" id="posicion" name="posicion" placeholder="Posicion" formControlName="position" required>
+            </div>
+          </div>
+          <div class="form-row mb-3"
+               [ngClass]="{'has-error':(formGroup.get('location').touched || formGroup.get('location').dirty) && !formGroup.get('location').valid}">
+            <div class="col-md-4">
+              <label for="ubicacion">Ubicacion *</label>
+              <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Ubicacion del empleo" formControlName="location" required>
+            </div>
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('creationDate').touched || formGroup.get('creationDate').dirty) && !formGroup.get('creationDate').valid}">
+              <label for="fecha">Fecha de creacion *</label>
+              <input type="date" class="form-control" id="fecha" name="fecha" formControlName="creationDate" required>
+            </div>
+            <div class="col-md-4"
+                 [ngClass]="{'has-error':(formGroup.get('personalId').touched || formGroup.get('personalId').dirty) && !formGroup.get('personalId').valid}">
+              <label for="usuario">Usuario*</label>
+              <ngx-select-dropdown name="usuario"
+                                   (change)="selectionChanged($event)"
+                                   formControlName="personal"
+                                   [config]="config2"
+                                   [options]="users"
+                                   required>
+              </ngx-select-dropdown>
+            </div>
+          </div>
+          <div class="form-row" mb-3
+               [ngClass]="{'has-error':(formGroup.get('description').touched || formGroup.get('description').dirty) && !formGroup.get('description').valid}">
+            <div class="form-group">
+              <label>Description del puesto *</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" cols="150" name="Description" formControlName="description" required></textarea>
+            </div>
+          </div>
+
+          <button *ngIf="edicion" class="btn btn-primary" type="submit" [disabled]="!formGroup.valid">Guardar</button>
+          <button *ngIf="!edicion" class="btn btn-primary" type="submit" [disabled]="!formGroup.valid">Agregar</button>
+
+        </form>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
 

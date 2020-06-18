@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\assets\css\" />
     <Folder Include="ClientApp\types\" />
   </ItemGroup>
 

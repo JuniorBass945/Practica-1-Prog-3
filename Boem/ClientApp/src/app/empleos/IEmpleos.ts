@@ -5,15 +5,15 @@ export interface IEmpleos {
   categoryId: number;
   jobType: number;
   company: string;
-  logo: string;
+  logo: any;
   url: string;
   position: string;
   location: string;
   description: string;
   creationDate: Date;
   personalId: number;
-  category: ICategory;
-  personal: object;
+  category: ICategory | any;
+  personal: object | any;
 
 
 

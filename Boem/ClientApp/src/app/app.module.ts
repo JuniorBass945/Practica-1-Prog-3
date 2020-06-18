@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -30,14 +31,17 @@ import { EmpleosService } from './empleos/empleos.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgxDatatableModule,
+    SelectDropDownModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: EmpleosComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'empleos', component: EmpleosComponent },
       { path: 'empleos/add', component: CreateOrUpdateEmpresaComponent },
-    ]),
-    NgxDatatableModule
+      { path: 'empleos/edit/:id', component: CreateOrUpdateEmpresaComponent }
+    ])
   ],
   providers: [EmpleosService],
   bootstrap: [AppComponent]
