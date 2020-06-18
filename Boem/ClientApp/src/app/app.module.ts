@@ -14,6 +14,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { EmpleosComponent } from './empleos/empleos.component';
 import { CreateOrUpdateEmpresaComponent } from './create-or-update-empresa/create-or-update-empresa.component';
 import { EmpleosService } from './empleos/empleos.service';
+import { SearchCategoryComponent } from './search-category/search-category.component';
 
 
 
@@ -25,7 +26,8 @@ import { EmpleosService } from './empleos/empleos.service';
     CounterComponent,
     FetchDataComponent,
     EmpleosComponent,
-    CreateOrUpdateEmpresaComponent
+    CreateOrUpdateEmpresaComponent,
+    SearchCategoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +42,9 @@ import { EmpleosService } from './empleos/empleos.service';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'empleos', component: EmpleosComponent },
       { path: 'empleos/add', component: CreateOrUpdateEmpresaComponent },
-      { path: 'empleos/edit/:id', component: CreateOrUpdateEmpresaComponent }
+      { path: 'empleos/edit/:id', component: CreateOrUpdateEmpresaComponent },
+      { path: 'empleos/category/:id', component: SearchCategoryComponent }
+
     ])
   ],
   providers: [EmpleosService],

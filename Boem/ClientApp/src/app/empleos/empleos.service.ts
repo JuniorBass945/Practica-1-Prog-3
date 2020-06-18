@@ -47,7 +47,10 @@ export class EmpleosService {
 
   public editEmpleo(empleo: IEmpleos): Observable<IEmpleos> {
     return this.http.put<IEmpleos>(this.apiUrl + "JobPostings/" + empleo.jobPostingId, empleo);
+  }
 
+  public getCategoryJob(id: number): Observable<ICategory> {
+    return this.http.get<ICategory>(this.apiUrl + "Categories/" + id);
   }
   
 }

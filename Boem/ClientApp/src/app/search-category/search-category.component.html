@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <h3>
+      Empleos en categoria <strong><i>{{categoryName | uppercase}}</i></strong> 
+    </h3>
+  </div>
+
+  <div class="my-5 clearfix">
+    <ul class="nav nav-pills card-header-pills float-left">
+      <li class="nav-item">
+        <a class="nav-link active" href="/empleos"><i class="fas fa-arrow-circle-left" style="font-size: large"> Atras</i></a>
+      </li>
+    </ul>
+    <form class="form-inline float-right" name="Search" (submit)="jobsSearcher()">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="valorBusc" name="buscado">
+      <button class="btn btn-success" type="submit">Search</button>
+    </form>
+  </div>
+
+
+  <ngx-datatable class="bootstrap"
+                 [rows]="searchResult"
+                 [columns]="columns"
+                 [columnMode]="ColumnMode.force"
+                 [headerHeight]="50"
+                 [footerHeight]="50"
+                 [rowHeight]="50"
+                 rowHeight="auto"
+                 [limit]="10"
+                 [sorts]="[{ prop: 'jobPostingId', dir: 'desc' }]">
+
+  </ngx-datatable>
+</div>

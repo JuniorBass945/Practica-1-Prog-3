@@ -43,7 +43,7 @@ namespace Boem.Controllers
                 return BadRequest(ModelState);
             }
 
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.Category.Include(x => x.JobPosting).FirstOrDefaultAsync(y => y.CategoryId == id);
 
             if (category == null)
             {

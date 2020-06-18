@@ -31,13 +31,14 @@
   <div class="mb-5" *ngFor="let categoria of searchResult">
     <div *ngIf="categoria.jobPosting.length > 0">
 
-      <a href="#"><strong>{{categoria.categoryName | uppercase }}</strong> {{categoria.jobPosting.length}} resultados<span></span> <span class="float-right">Mas..</span></a>
+      <a href="empleos/category/{{categoria.categoryId}}"><strong>{{categoria.categoryName | uppercase }}</strong> {{categoria.jobPosting.length}} resultados<span></span> <span class="float-right">Mas..</span></a>
       <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Location</th>
             <th scope="col">Position</th>
             <th scope="col">Company</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

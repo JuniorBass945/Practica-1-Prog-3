@@ -13,7 +13,6 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
 export class EmpleosComponent implements OnInit {
 
   empleosPorCategoria: ICategory[];
-  columns = [{ name: 'Location' }, { name: 'Position' }, { name: 'Company' }];
   ColumnMode = ColumnMode;
   searchResult: ICategory[];
 
