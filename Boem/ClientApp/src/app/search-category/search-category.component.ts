@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
+import { ColumnMode, SortType, SelectionType } from '@swimlane/ngx-datatable';
 import { EmpleosService } from '../empleos/empleos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IEmpleos } from '../empleos/IEmpleos';
 
 @Component({
@@ -17,12 +17,14 @@ export class SearchCategoryComponent implements OnInit {
 
   ColumnMode = ColumnMode;
   SortType = SortType;
+  SelectionType = SelectionType;
 
   valorBusc: string;
   searchResult: IEmpleos[];
   categoryName: string;
+  selected: [];
 
-  constructor(private empleosService: EmpleosService, private activedRoute: ActivatedRoute) {
+  constructor(private empleosService: EmpleosService, private activedRoute: ActivatedRoute, private router: Router) {
     
   }
 
@@ -72,6 +74,12 @@ export class SearchCategoryComponent implements OnInit {
 
   }
 
+
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected[0], this.selected);
+    this.router.navigate(['empleos/' + selected[0].jobPostingId]);
+  }
 
 
 

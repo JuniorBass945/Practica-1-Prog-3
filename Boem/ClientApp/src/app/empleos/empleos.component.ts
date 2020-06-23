@@ -3,6 +3,7 @@ import { IEmpleos } from './IEmpleos';
 import { EmpleosService } from './empleos.service';
 import { ICategory } from './ICategory';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class EmpleosComponent implements OnInit {
 
   valorBusc: string;
 
-  constructor(private empleosService: EmpleosService) {
+  constructor(private empleosService: EmpleosService, private router: Router) {
 
   }
 
@@ -72,6 +73,12 @@ export class EmpleosComponent implements OnInit {
 
     
    
+  }
+
+  onSelect(id) {
+    console.log('Select Event', id);
+    this.router.navigate(["empleos/" + id]);
+
   }
 
 

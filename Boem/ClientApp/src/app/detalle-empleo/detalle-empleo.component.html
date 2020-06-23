@@ -1,0 +1,29 @@
+<div>
+  <div *ngIf="empleo" class="container-fluid mt-5">
+    <div class="d-flex">
+      <div class="flex-fill">
+        <h1>{{empleo.company}}</h1>
+        <h4>{{empleo.location}}</h4>
+        <div class="border-top border-bottom my-3">
+          <h4>{{empleo.position}} - <span class="text-monospace">{{empleo.jobTypeNavigation.name}}</span></h4>
+        </div>
+      </div>
+      <div>
+        <img src="logo.png" alt="Logo de la empresa" class="logo_empresa rounded" />
+      </div>
+    </div>
+
+    <div>
+      <p>{{empleo.description}}</p>
+    </div>
+    <div>
+      <h5>¿Como aplicar?</h5>
+      <p>Envia tu resumen a <span class="badge badge-secondary">{{empleo.personal.name}}</span> a <span class="font-italic"> {{empleo.personal.email}}</span></p>
+    </div>
+    <div class="my-5">
+      <a class="btn btn-primary" href="empleos/edit/{{empleo.jobPostingId}}">Editar</a>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Volver</button>
+    </div>
+    
+  </div>
+</div>

@@ -22,12 +22,14 @@
                  [rows]="searchResult"
                  [columns]="columns"
                  [columnMode]="ColumnMode.force"
+                 [selectionType]="SelectionType.single"
                  [headerHeight]="50"
                  [footerHeight]="50"
                  [rowHeight]="50"
                  rowHeight="auto"
                  [limit]="10"
-                 [sorts]="[{ prop: 'jobPostingId', dir: 'desc' }]">
+                 [sorts]="[{ prop: 'jobPostingId', dir: 'desc' }]"
+                 (select)="onSelect($event)">
 
   </ngx-datatable>
 </div>

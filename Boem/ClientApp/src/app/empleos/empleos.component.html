@@ -42,11 +42,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="clickable-row" *ngFor="let empleo of reverseJobs(categoria.jobPosting).slice(0,10)">
+          <tr class="clickable-row" *ngFor="let empleo of reverseJobs(categoria.jobPosting).slice(0,10)" (click)="onSelect(empleo.jobPostingId)">
             <td>{{empleo.location}}</td>
             <td>{{empleo.position}}</td>
             <td>{{empleo.company}}</td>
-            <td><a class="btn btn-primary" href="empleos/edit/{{empleo.jobPostingId}}">Editar</a></td>
           </tr>
         </tbody>
       </table>
